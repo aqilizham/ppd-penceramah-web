@@ -1,0 +1,61 @@
+{
+  "name": "Sistem Kelulusan Penceramah PPD Klang",
+  "short_name": "Penceramah PPD",
+  "description": "Aplikasi permohonan, semakan dan penjanaan surat kelulusan penceramah PPD Klang.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f7f8fb",
+  "theme_color": "#0d7b83",
+  "categories": ["education", "productivity"],
+  "lang": "ms-MY",
+  "icons": [
+    {
+      "src": "app-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "app-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Permohonan Baru",
+      "short_name": "Borang",
+      "description": "Buka borang permohonan sekolah.",
+      "url": "./#application",
+      "icons": [
+        {
+          "src": "app-icon.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Surat PPD",
+      "short_name": "Surat",
+      "description": "Buka pratonton surat PPD.",
+      "url": "./#letters",
+      "icons": [
+        {
+          "src": "app-icon.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
+  ]
+}

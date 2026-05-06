@@ -1,0 +1,1666 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d7b83">
+  <meta name="application-name" content="Kelulusan Penceramah PPD">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Penceramah PPD">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="app-icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="app-icon-192.png">
+  <title>Sistem Kelulusan Penceramah PPD Klang</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f8fb;
+      --surface: #ffffff;
+      --surface-2: #f0f4f7;
+      --ink: #1d252d;
+      --muted: #657280;
+      --line: #dce3ea;
+      --brand: #0d7b83;
+      --brand-dark: #075d64;
+      --accent: #b06b00;
+      --ok: #1d7a45;
+      --warn: #b26a00;
+      --danger: #bd3b3b;
+      --info: #2d6cdf;
+      --shadow: 0 18px 48px rgba(24, 40, 56, .11);
+      --radius: 8px;
+      --sidebar: 290px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: var(--sidebar) minmax(0, 1fr);
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 22px;
+      background: #ffffff;
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, #0d7b83 0%, #0d7b83 52%, #d99a28 52%, #d99a28 100%);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      letter-spacing: 0;
+      flex: 0 0 auto;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.2;
+    }
+
+    .brand p {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .nav {
+      display: grid;
+      gap: 8px;
+    }
+
+    .nav button {
+      min-height: 42px;
+      padding: 10px 12px;
+      border-radius: var(--radius);
+      background: transparent;
+      color: var(--ink);
+      display: grid;
+      grid-template-columns: 26px 1fr;
+      align-items: center;
+      text-align: left;
+    }
+
+    .nav button span:first-child {
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      border-radius: 6px;
+      background: var(--surface-2);
+      color: var(--brand-dark);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .nav button.active {
+      background: #e3f3f4;
+      color: var(--brand-dark);
+      font-weight: 700;
+    }
+
+    .nav button.active span:first-child {
+      background: var(--brand);
+      color: #fff;
+    }
+
+    .sidebar-note {
+      margin-top: auto;
+      padding: 14px;
+      border: 1px solid #d6e7e9;
+      border-radius: var(--radius);
+      background: #f0fbfc;
+      color: #27555a;
+      font-size: 13px;
+    }
+
+    .main {
+      min-width: 0;
+      padding: 26px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .page-title h2 {
+      margin: 0;
+      font-size: 25px;
+      letter-spacing: 0;
+    }
+
+    .page-title p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      max-width: 720px;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      min-height: 40px;
+      padding: 10px 14px;
+      border-radius: 7px;
+      background: var(--brand);
+      color: #fff;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      background: var(--brand-dark);
+    }
+
+    .btn.secondary {
+      background: #ffffff;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      font-weight: 600;
+    }
+
+    .btn.secondary:hover {
+      background: var(--surface-2);
+    }
+
+    .btn.warning {
+      background: var(--accent);
+    }
+
+    .btn.warning:hover {
+      background: #8b5400;
+    }
+
+    .btn:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .metric {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      min-height: 104px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 26px;
+      line-height: 1.1;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(340px, .85fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: 0 1px 0 rgba(30, 45, 60, .03);
+      overflow: hidden;
+    }
+
+    .panel-head {
+      padding: 15px 16px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .panel-head h3 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .panel-body {
+      padding: 16px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+
+    th,
+    td {
+      padding: 12px 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      background: #fbfcfd;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .tag,
+    .status {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .tag {
+      background: #eef2f5;
+      color: #33414d;
+    }
+
+    .tag.swasta {
+      background: #fff2dd;
+      color: #8b5400;
+    }
+
+    .tag.luar {
+      background: #eaf0ff;
+      color: #244b9b;
+    }
+
+    .tag.dalam {
+      background: #e7f6ee;
+      color: #1d6a3d;
+    }
+
+    .status.draft {
+      background: #eef2f5;
+      color: #44515d;
+    }
+
+    .status.sent {
+      background: #eaf0ff;
+      color: #244b9b;
+    }
+
+    .status.review {
+      background: #fff2dd;
+      color: #8b5400;
+    }
+
+    .status.process {
+      background: #e7f6ee;
+      color: #1d6a3d;
+    }
+
+    .status.approved {
+      background: #e3f3f4;
+      color: #075d64;
+    }
+
+    .status.issued {
+      background: #f0eefe;
+      color: #5d3bb6;
+    }
+
+    .row-actions {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .mini-btn {
+      min-height: 32px;
+      padding: 7px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .mini-btn:hover {
+      background: var(--surface-2);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      color: #344250;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      min-height: 40px;
+      border: 1px solid #cfd8e1;
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      padding: 9px 10px;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 86px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(13, 123, 131, .14);
+    }
+
+    .checks {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .check {
+      min-height: 52px;
+      padding: 11px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .check input {
+      min-height: auto;
+      width: 16px;
+      height: 16px;
+      margin-top: 2px;
+      accent-color: var(--brand);
+    }
+
+    .check span {
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .check small {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+    }
+
+    .notice {
+      padding: 12px;
+      border-radius: var(--radius);
+      background: #fff8e8;
+      border: 1px solid #f3d18f;
+      color: #765000;
+      font-size: 13px;
+    }
+
+    .notice.ok {
+      background: #ecf8f1;
+      border-color: #b8e2c7;
+      color: #1d633b;
+    }
+
+    .notice.danger {
+      background: #fff0f0;
+      border-color: #f1b6b6;
+      color: #8d2f2f;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, .95fr) minmax(340px, 1.05fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .flow {
+      display: grid;
+      gap: 12px;
+    }
+
+    .flow-node {
+      position: relative;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .flow-node:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      left: 30px;
+      bottom: -13px;
+      width: 2px;
+      height: 13px;
+      background: #b9c8d3;
+    }
+
+    .flow-no {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--brand);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .flow-node h4 {
+      margin: 0;
+      font-size: 15px;
+    }
+
+    .flow-node p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .flow-branches {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .branch {
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 10px;
+      background: #fbfcfd;
+      min-height: 76px;
+    }
+
+    .branch strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .branch small {
+      color: var(--muted);
+    }
+
+    .letter-tabs {
+      display: flex;
+      gap: 8px;
+      padding: 12px 12px 0;
+      flex-wrap: wrap;
+    }
+
+    .letter-tab {
+      min-height: 36px;
+      padding: 8px 12px;
+      border-radius: 7px;
+      background: #eef2f5;
+      color: #33414d;
+      font-weight: 700;
+    }
+
+    .letter-tab.active {
+      background: var(--brand);
+      color: #fff;
+    }
+
+    .letter {
+      margin: 16px;
+      padding: 26px;
+      border: 1px solid #ccd5de;
+      min-height: 620px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .letter-header {
+      border-bottom: 2px solid #2d3a45;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .letter-header strong {
+      font-size: 16px;
+    }
+
+    .letter-header span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .letter p {
+      margin: 0 0 12px;
+    }
+
+    .letter .subject {
+      margin: 22px 0 16px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .letter-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 0;
+      margin: 14px 0;
+    }
+
+    .letter-table td {
+      border: 1px solid #d7dfe6;
+      padding: 8px 10px;
+    }
+
+    .empty {
+      padding: 28px;
+      text-align: center;
+      color: var(--muted);
+      border: 1px dashed #c9d3dc;
+      border-radius: var(--radius);
+      background: #fbfcfd;
+    }
+
+    .toast {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 5;
+      width: min(360px, calc(100vw - 44px));
+      padding: 12px 14px;
+      border-radius: var(--radius);
+      background: #1d252d;
+      color: #fff;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: .2s ease;
+      font-size: 13px;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1040px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: relative;
+        height: auto;
+        padding: 16px;
+      }
+
+      .nav {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .sidebar-note {
+        display: none;
+      }
+
+      .dashboard-grid,
+      .split {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .main {
+        padding: 16px;
+      }
+
+      .topbar {
+        flex-direction: column;
+      }
+
+      .top-actions,
+      .top-actions .btn {
+        width: 100%;
+      }
+
+      .metrics,
+      .form-grid,
+      .checks,
+      .flow-branches {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .nav button {
+        grid-template-columns: 24px 1fr;
+        font-size: 13px;
+      }
+
+      .letter {
+        margin: 12px;
+        padding: 18px;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .sidebar,
+      .topbar,
+      .letter-tabs,
+      .panel-head,
+      .toast,
+      .no-print {
+        display: none !important;
+      }
+
+      .app,
+      .main,
+      .section,
+      .section.active {
+        display: block;
+        padding: 0;
+      }
+
+      .section:not(#letters) {
+        display: none !important;
+      }
+
+      .panel {
+        border: 0;
+        box-shadow: none;
+      }
+
+      .letter {
+        margin: 0;
+        border: 0;
+        box-shadow: none;
+        min-height: auto;
+        page-break-after: always;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">PPD</div>
+        <div>
+          <h1>Kelulusan Penceramah</h1>
+          <p>Pejabat Pendidikan Daerah Klang</p>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Navigasi utama">
+        <button class="active" data-section="dashboard"><span>D</span><span>Dashboard</span></button>
+        <button data-section="application"><span>B</span><span>Borang Sekolah</span></button>
+        <button data-section="workflow"><span>F</span><span>Flow Proses</span></button>
+        <button data-section="letters"><span>S</span><span>Surat PPD</span></button>
+      </nav>
+
+      <div class="sidebar-note">
+        Sistem ini membezakan penceramah penjawat awam dalam PPD Klang, penjawat awam luar daerah Klang, dan swasta. Surat jemputan sekolah diwajibkan untuk kategori swasta.
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="page-title">
+          <h2 id="pageTitle">Dashboard Permohonan</h2>
+          <p id="pageDescription">Pantau permohonan sekolah, semak dokumen wajib, proses kelulusan PPD, dan jana dua surat rasmi.</p>
+        </div>
+        <div class="top-actions no-print">
+          <button class="btn secondary" id="installApp" hidden>Pasang App</button>
+          <button class="btn secondary" id="resetDemo">Reset Demo</button>
+          <button class="btn" id="newApplication">Permohonan Baru</button>
+        </div>
+      </header>
+
+      <section class="section active" id="dashboard">
+        <div class="metrics" id="metrics"></div>
+
+        <div class="dashboard-grid">
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Senarai Permohonan</h3>
+              <span class="tag" id="applicationCount">0 rekod</span>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Rujukan</th>
+                    <th>Sekolah</th>
+                    <th>Program</th>
+                    <th>Penceramah</th>
+                    <th>Kategori</th>
+                    <th>Status</th>
+                    <th>Tindakan</th>
+                  </tr>
+                </thead>
+                <tbody id="applicationRows"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Ringkasan Permohonan</h3>
+              <span class="tag" id="selectedRef">Tiada pilihan</span>
+            </div>
+            <div class="panel-body" id="summaryPanel">
+              <div class="empty">Pilih permohonan untuk melihat status dokumen dan tindakan PPD.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="application">
+        <div class="split">
+          <form class="panel" id="applicationForm">
+            <div class="panel-head">
+              <h3>Maklumat Permohonan Sekolah</h3>
+              <span class="tag" id="formMode">Rekod baru</span>
+            </div>
+            <div class="panel-body">
+              <div class="form-grid">
+                <div class="field">
+                  <label for="schoolName">Nama sekolah</label>
+                  <input id="schoolName" required placeholder="Contoh: SK Bukit Tinggi">
+                </div>
+                <div class="field">
+                  <label for="officerName">Pegawai penyedia</label>
+                  <input id="officerName" required placeholder="Nama guru / urus setia">
+                </div>
+                <div class="field">
+                  <label for="programTitle">Nama program ceramah</label>
+                  <input id="programTitle" required placeholder="Contoh: Ceramah Keselamatan Siber">
+                </div>
+                <div class="field">
+                  <label for="programDate">Tarikh program</label>
+                  <input id="programDate" type="date" required>
+                </div>
+                <div class="field">
+                  <label for="speakerName">Nama penceramah</label>
+                  <input id="speakerName" required placeholder="Nama penuh penceramah">
+                </div>
+                <div class="field">
+                  <label for="speakerIc">No. kad pengenalan penceramah</label>
+                  <input id="speakerIc" required placeholder="Contoh: 800101-10-5555">
+                </div>
+                <div class="field">
+                  <label for="speakerCategory">Kategori penceramah</label>
+                  <select id="speakerCategory" required>
+                    <option value="dalam">Penjawat awam dalam PPD Klang</option>
+                    <option value="luar">Penjawat awam luar daerah Klang</option>
+                    <option value="swasta">Swasta</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="speakerAgency">Jabatan / organisasi</label>
+                  <input id="speakerAgency" required placeholder="Contoh: Klinik Kesihatan Klang">
+                </div>
+                <div class="field full">
+                  <label for="purpose">Tujuan / ringkasan program</label>
+                  <textarea id="purpose" placeholder="Ringkasan objektif ceramah"></textarea>
+                </div>
+                <div class="field full">
+                  <label>Dokumen disertakan</label>
+                  <div class="checks">
+                    <label class="check">
+                      <input type="checkbox" id="docCover">
+                      <span>Surat iringan sekolah <small>Permohonan rasmi kepada PPD</small></span>
+                    </label>
+                    <label class="check">
+                      <input type="checkbox" id="docAppointment">
+                      <span>Borang pelantikan penceramah <small>Borang lengkap sekolah</small></span>
+                    </label>
+                    <label class="check">
+                      <input type="checkbox" id="docIc">
+                      <span>Salinan IC penceramah <small>Pengesahan identiti penceramah</small></span>
+                    </label>
+                    <label class="check">
+                      <input type="checkbox" id="docInvite">
+                      <span>Surat jemputan sekolah <small>Wajib jika penceramah swasta</small></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div style="height:14px"></div>
+              <div id="documentHint" class="notice"></div>
+              <div style="height:14px"></div>
+
+              <div class="top-actions">
+                <button class="btn secondary" type="button" id="clearForm">Kosongkan</button>
+                <button class="btn" type="submit">Simpan Permohonan</button>
+              </div>
+            </div>
+          </form>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Logik Semakan Sistem</h3>
+              <span class="tag">Automatik</span>
+            </div>
+            <div class="panel-body">
+              <div class="flow">
+                <div class="flow-node">
+                  <div class="flow-no">1</div>
+                  <div>
+                    <h4>Sekolah lengkapkan borang</h4>
+                    <p>Borang pelantikan penceramah, maklumat program, maklumat penceramah dan IC direkodkan.</p>
+                  </div>
+                </div>
+                <div class="flow-node">
+                  <div class="flow-no">2</div>
+                  <div>
+                    <h4>Sistem kenal pasti kategori</h4>
+                    <p>Kategori menentukan keperluan surat jemputan sekolah sebelum dihantar kepada PPD.</p>
+                  </div>
+                </div>
+                <div class="flow-node">
+                  <div class="flow-no">3</div>
+                  <div>
+                    <h4>Semakan dokumen wajib</h4>
+                    <p>Permohonan hanya boleh diproses apabila dokumen minimum lengkap.</p>
+                  </div>
+                </div>
+                <div class="flow-node">
+                  <div class="flow-no">4</div>
+                  <div>
+                    <h4>PPD proses dan jana surat</h4>
+                    <p>Apabila diluluskan, sistem menyediakan surat kelulusan program dan surat jemputan penceramah.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="workflow">
+        <div class="panel">
+          <div class="panel-head">
+            <h3>Flow Chart Kelulusan Penceramah PPD</h3>
+            <span class="tag">Proses utama</span>
+          </div>
+          <div class="panel-body">
+            <div class="flow">
+              <div class="flow-node">
+                <div class="flow-no">1</div>
+                <div>
+                  <h4>Sekolah sediakan permohonan</h4>
+                  <p>Sekolah melengkapkan borang pelantikan penceramah dan maklumat program.</p>
+                  <div class="flow-branches">
+                    <div class="branch">
+                      <strong>1.1 Penjawat awam dalam PPD Klang</strong>
+                      <small>Semakan dokumen asas.</small>
+                    </div>
+                    <div class="branch">
+                      <strong>1.2 Penjawat awam luar daerah Klang</strong>
+                      <small>Semakan dokumen asas dan jabatan luar daerah.</small>
+                    </div>
+                    <div class="branch">
+                      <strong>1.3 Swasta</strong>
+                      <small>Perlu surat jemputan sekolah kepada penceramah.</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flow-node">
+                <div class="flow-no">2</div>
+                <div>
+                  <h4>Sekolah keluarkan surat jemputan jika swasta</h4>
+                  <p>Sistem menandakan surat jemputan sekolah sebagai dokumen wajib untuk penceramah swasta.</p>
+                </div>
+              </div>
+              <div class="flow-node">
+                <div class="flow-no">3</div>
+                <div>
+                  <h4>Sekolah hantar permohonan kepada PPD</h4>
+                  <p>Dokumen: surat iringan, surat jemputan jika swasta, borang penceramah, dan IC penceramah.</p>
+                </div>
+              </div>
+              <div class="flow-node">
+                <div class="flow-no">4</div>
+                <div>
+                  <h4>PPD proses permohonan</h4>
+                  <p>PPD menyemak dokumen, kategori penceramah, maklumat program dan keputusan kelulusan.</p>
+                </div>
+              </div>
+              <div class="flow-node">
+                <div class="flow-no">5</div>
+                <div>
+                  <h4>PPD keluarkan dua surat</h4>
+                  <p>Surat Kelulusan Program Ceramah dan Surat Jemputan Kepada Penceramah disediakan oleh sistem.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="letters">
+        <div class="panel">
+          <div class="panel-head">
+            <h3>Pratonton Surat PPD</h3>
+            <div class="top-actions no-print">
+              <button class="btn secondary" id="chooseFirst">Pilih Rekod Siap</button>
+              <button class="btn warning" id="printLetters">Cetak Surat</button>
+            </div>
+          </div>
+          <div class="letter-tabs no-print">
+            <button class="letter-tab active" data-letter="approval">Surat Kelulusan Program</button>
+            <button class="letter-tab" data-letter="invite">Surat Jemputan Penceramah</button>
+          </div>
+          <div id="letterOutput"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const STORAGE_KEY = "ppd-speaker-approval-demo";
+
+    const statuses = [
+      { key: "draft", label: "Draf", className: "draft" },
+      { key: "sent", label: "Dihantar Sekolah", className: "sent" },
+      { key: "review", label: "Semakan Dokumen", className: "review" },
+      { key: "process", label: "Diproses PPD", className: "process" },
+      { key: "approved", label: "Diluluskan", className: "approved" },
+      { key: "issued", label: "Surat Dijana", className: "issued" }
+    ];
+
+    const categories = {
+      dalam: { label: "Penjawat awam dalam PPD Klang", className: "dalam" },
+      luar: { label: "Penjawat awam luar daerah Klang", className: "luar" },
+      swasta: { label: "Swasta", className: "swasta" }
+    };
+
+    const seedApplications = [
+      {
+        id: "PPDKLG-2026-001",
+        schoolName: "SK Bukit Tinggi",
+        officerName: "Pn. Nur Aina",
+        programTitle: "Ceramah Keselamatan Siber Murid",
+        programDate: "2026-05-22",
+        speakerName: "Encik Hafiz Rahman",
+        speakerIc: "800101-10-5555",
+        speakerCategory: "swasta",
+        speakerAgency: "CyberSafe Training Sdn. Bhd.",
+        purpose: "Memberi pendedahan kepada murid tentang keselamatan akaun, etika media sosial dan risiko penipuan dalam talian.",
+        docs: { cover: true, appointment: true, ic: true, invite: true },
+        status: "issued",
+        ppdOfficer: "Unit Pembangunan Bakat Murid"
+      },
+      {
+        id: "PPDKLG-2026-002",
+        schoolName: "SMK Telok Gadong",
+        officerName: "En. Farid Jamal",
+        programTitle: "Ceramah Pencegahan Denggi",
+        programDate: "2026-05-29",
+        speakerName: "Dr. Amira Salleh",
+        speakerIc: "780202-08-1234",
+        speakerCategory: "luar",
+        speakerAgency: "Pejabat Kesihatan Daerah Petaling",
+        purpose: "Meningkatkan kesedaran warga sekolah tentang langkah pencegahan denggi.",
+        docs: { cover: true, appointment: true, ic: true, invite: false },
+        status: "process",
+        ppdOfficer: "Unit HEM"
+      },
+      {
+        id: "PPDKLG-2026-003",
+        schoolName: "SJKC Pandamaran A",
+        officerName: "Pn. Lee Mei Ling",
+        programTitle: "Ceramah Pemakanan Sihat",
+        programDate: "2026-06-03",
+        speakerName: "Pn. Siti Mariah",
+        speakerIc: "850303-14-4321",
+        speakerCategory: "dalam",
+        speakerAgency: "Klinik Kesihatan Klang",
+        purpose: "Program kesedaran gaya hidup sihat dan pemakanan seimbang.",
+        docs: { cover: true, appointment: true, ic: false, invite: false },
+        status: "review",
+        ppdOfficer: "Unit HEM"
+      }
+    ];
+
+    let applications = loadApplications();
+    let selectedId = applications[0]?.id || "";
+    let editingId = "";
+    let activeLetter = "approval";
+    let deferredInstallPrompt = null;
+
+    const els = {
+      navButtons: document.querySelectorAll(".nav button"),
+      sections: document.querySelectorAll(".section"),
+      pageTitle: document.getElementById("pageTitle"),
+      pageDescription: document.getElementById("pageDescription"),
+      metrics: document.getElementById("metrics"),
+      applicationRows: document.getElementById("applicationRows"),
+      applicationCount: document.getElementById("applicationCount"),
+      selectedRef: document.getElementById("selectedRef"),
+      summaryPanel: document.getElementById("summaryPanel"),
+      applicationForm: document.getElementById("applicationForm"),
+      formMode: document.getElementById("formMode"),
+      documentHint: document.getElementById("documentHint"),
+      letterOutput: document.getElementById("letterOutput"),
+      toast: document.getElementById("toast"),
+      installApp: document.getElementById("installApp"),
+      schoolName: document.getElementById("schoolName"),
+      officerName: document.getElementById("officerName"),
+      programTitle: document.getElementById("programTitle"),
+      programDate: document.getElementById("programDate"),
+      speakerName: document.getElementById("speakerName"),
+      speakerIc: document.getElementById("speakerIc"),
+      speakerCategory: document.getElementById("speakerCategory"),
+      speakerAgency: document.getElementById("speakerAgency"),
+      purpose: document.getElementById("purpose"),
+      docCover: document.getElementById("docCover"),
+      docAppointment: document.getElementById("docAppointment"),
+      docIc: document.getElementById("docIc"),
+      docInvite: document.getElementById("docInvite")
+    };
+
+    const titles = {
+      dashboard: ["Dashboard Permohonan", "Pantau permohonan sekolah, semak dokumen wajib, proses kelulusan PPD, dan jana dua surat rasmi."],
+      application: ["Borang Permohonan Sekolah", "Rekod permohonan baharu atau kemas kini maklumat penceramah sebelum dihantar untuk proses PPD."],
+      workflow: ["Flow Chart Kelulusan Penceramah", "Aliran kerja penuh daripada penyediaan sekolah sehingga PPD mengeluarkan surat rasmi."],
+      letters: ["Surat Rasmi PPD", "Pratonton surat kelulusan program ceramah dan surat jemputan kepada penceramah berdasarkan rekod terpilih."]
+    };
+
+    function loadApplications() {
+      try {
+        const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+        if (Array.isArray(stored) && stored.length) return stored;
+      } catch (error) {
+        console.warn(error);
+      }
+      return seedApplications;
+    }
+
+    function persist() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(applications));
+    }
+
+    function getStatus(statusKey) {
+      return statuses.find((item) => item.key === statusKey) || statuses[0];
+    }
+
+    function formatDate(value) {
+      if (!value) return "-";
+      const date = new Date(value + "T00:00:00");
+      return new Intl.DateTimeFormat("ms-MY", { day: "2-digit", month: "long", year: "numeric" }).format(date);
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#039;"
+      }[char]));
+    }
+
+    function nextRef() {
+      const year = new Date().getFullYear();
+      const max = applications.reduce((highest, item) => {
+        const match = item.id.match(/PPDKLG-\d{4}-(\d+)/);
+        return match ? Math.max(highest, Number(match[1])) : highest;
+      }, 0);
+      return `PPDKLG-${year}-${String(max + 1).padStart(3, "0")}`;
+    }
+
+    function requiredDocsFor(category) {
+      const required = ["cover", "appointment", "ic"];
+      if (category === "swasta") required.push("invite");
+      return required;
+    }
+
+    function docLabel(key) {
+      return {
+        cover: "Surat iringan sekolah",
+        appointment: "Borang pelantikan penceramah",
+        ic: "Salinan IC penceramah",
+        invite: "Surat jemputan sekolah"
+      }[key];
+    }
+
+    function missingDocs(item) {
+      return requiredDocsFor(item.speakerCategory).filter((key) => !item.docs[key]);
+    }
+
+    function isComplete(item) {
+      return missingDocs(item).length === 0;
+    }
+
+    function setSection(sectionId) {
+      els.navButtons.forEach((button) => {
+        button.classList.toggle("active", button.dataset.section === sectionId);
+      });
+      els.sections.forEach((section) => {
+        section.classList.toggle("active", section.id === sectionId);
+      });
+      els.pageTitle.textContent = titles[sectionId][0];
+      els.pageDescription.textContent = titles[sectionId][1];
+      if (sectionId === "letters") renderLetters();
+    }
+
+    function renderMetrics() {
+      const data = [
+        ["Jumlah Permohonan", applications.length],
+        ["Menunggu PPD", applications.filter((item) => ["sent", "review", "process"].includes(item.status)).length],
+        ["Dokumen Lengkap", applications.filter(isComplete).length],
+        ["Surat Dijana", applications.filter((item) => item.status === "issued").length]
+      ];
+      els.metrics.innerHTML = data.map(([label, value]) => `
+        <div class="metric">
+          <strong>${value}</strong>
+          <span>${label}</span>
+        </div>
+      `).join("");
+    }
+
+    function renderRows() {
+      els.applicationCount.textContent = `${applications.length} rekod`;
+      if (!applications.length) {
+        els.applicationRows.innerHTML = `<tr><td colspan="7"><div class="empty">Belum ada permohonan.</div></td></tr>`;
+        return;
+      }
+
+      els.applicationRows.innerHTML = applications.map((item) => {
+        const status = getStatus(item.status);
+        const category = categories[item.speakerCategory];
+        return `
+          <tr>
+            <td><strong>${escapeHtml(item.id)}</strong></td>
+            <td>${escapeHtml(item.schoolName)}<br><small>${escapeHtml(item.officerName)}</small></td>
+            <td>${escapeHtml(item.programTitle)}<br><small>${formatDate(item.programDate)}</small></td>
+            <td>${escapeHtml(item.speakerName)}<br><small>${escapeHtml(item.speakerAgency)}</small></td>
+            <td><span class="tag ${category.className}">${category.label}</span></td>
+            <td><span class="status ${status.className}">${status.label}</span></td>
+            <td>
+              <div class="row-actions">
+                <button class="mini-btn" data-action="select" data-id="${escapeHtml(item.id)}">Pilih</button>
+                <button class="mini-btn" data-action="edit" data-id="${escapeHtml(item.id)}">Edit</button>
+                <button class="mini-btn" data-action="advance" data-id="${escapeHtml(item.id)}">Proses</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function renderSummary() {
+      const item = applications.find((entry) => entry.id === selectedId);
+      if (!item) {
+        els.selectedRef.textContent = "Tiada pilihan";
+        els.summaryPanel.innerHTML = `<div class="empty">Pilih permohonan untuk melihat status dokumen dan tindakan PPD.</div>`;
+        return;
+      }
+
+      const missing = missingDocs(item);
+      const status = getStatus(item.status);
+      els.selectedRef.textContent = item.id;
+      els.summaryPanel.innerHTML = `
+        <div class="${missing.length ? "notice danger" : "notice ok"}">
+          ${missing.length ? `Dokumen belum lengkap: ${missing.map(docLabel).join(", ")}.` : "Dokumen wajib lengkap. Permohonan boleh diproses oleh PPD."}
+        </div>
+        <div style="height:14px"></div>
+        <table class="letter-table">
+          <tr><td>Sekolah</td><td><strong>${escapeHtml(item.schoolName)}</strong></td></tr>
+          <tr><td>Program</td><td>${escapeHtml(item.programTitle)}</td></tr>
+          <tr><td>Tarikh</td><td>${formatDate(item.programDate)}</td></tr>
+          <tr><td>Penceramah</td><td>${escapeHtml(item.speakerName)}</td></tr>
+          <tr><td>Kategori</td><td>${categories[item.speakerCategory].label}</td></tr>
+          <tr><td>Status</td><td><span class="status ${status.className}">${status.label}</span></td></tr>
+        </table>
+        <div class="top-actions">
+          <button class="btn secondary" data-summary="edit">Edit Rekod</button>
+          <button class="btn" data-summary="advance">${item.status === "issued" ? "Lihat Surat" : "Proses Seterusnya"}</button>
+        </div>
+      `;
+    }
+
+    function renderDocumentHint() {
+      const temp = getFormData(false);
+      const missing = missingDocs(temp);
+      const category = categories[temp.speakerCategory];
+      if (missing.length) {
+        els.documentHint.className = "notice";
+        els.documentHint.textContent = `${category.label}: dokumen wajib yang belum ditanda ialah ${missing.map(docLabel).join(", ")}.`;
+      } else {
+        els.documentHint.className = "notice ok";
+        els.documentHint.textContent = `${category.label}: semua dokumen wajib telah lengkap.`;
+      }
+    }
+
+    function getFormData(includeId = true) {
+      return {
+        id: includeId ? (editingId || nextRef()) : "preview",
+        schoolName: els.schoolName.value.trim(),
+        officerName: els.officerName.value.trim(),
+        programTitle: els.programTitle.value.trim(),
+        programDate: els.programDate.value,
+        speakerName: els.speakerName.value.trim(),
+        speakerIc: els.speakerIc.value.trim(),
+        speakerCategory: els.speakerCategory.value,
+        speakerAgency: els.speakerAgency.value.trim(),
+        purpose: els.purpose.value.trim(),
+        docs: {
+          cover: els.docCover.checked,
+          appointment: els.docAppointment.checked,
+          ic: els.docIc.checked,
+          invite: els.docInvite.checked
+        },
+        status: "sent",
+        ppdOfficer: "Unit berkaitan"
+      };
+    }
+
+    function fillForm(item) {
+      editingId = item?.id || "";
+      els.formMode.textContent = item ? `Edit ${item.id}` : "Rekod baru";
+      els.schoolName.value = item?.schoolName || "";
+      els.officerName.value = item?.officerName || "";
+      els.programTitle.value = item?.programTitle || "";
+      els.programDate.value = item?.programDate || "";
+      els.speakerName.value = item?.speakerName || "";
+      els.speakerIc.value = item?.speakerIc || "";
+      els.speakerCategory.value = item?.speakerCategory || "dalam";
+      els.speakerAgency.value = item?.speakerAgency || "";
+      els.purpose.value = item?.purpose || "";
+      els.docCover.checked = item?.docs.cover || false;
+      els.docAppointment.checked = item?.docs.appointment || false;
+      els.docIc.checked = item?.docs.ic || false;
+      els.docInvite.checked = item?.docs.invite || false;
+      renderDocumentHint();
+    }
+
+    function advanceApplication(id) {
+      const index = applications.findIndex((item) => item.id === id);
+      if (index < 0) return;
+      const item = applications[index];
+      selectedId = id;
+
+      if (!isComplete(item)) {
+        item.status = "review";
+        persist();
+        renderAll();
+        toast("Permohonan belum lengkap. Sistem kekalkan status Semakan Dokumen.");
+        return;
+      }
+
+      const currentIndex = statuses.findIndex((status) => status.key === item.status);
+      const next = statuses[Math.min(currentIndex + 1, statuses.length - 1)];
+      item.status = next.key;
+      persist();
+      renderAll();
+      toast(item.status === "issued" ? "Dua surat PPD telah dijana untuk rekod ini." : `Status dikemas kini kepada ${next.label}.`);
+    }
+
+    function renderLetters() {
+      const item = applications.find((entry) => entry.id === selectedId) || applications.find((entry) => entry.status === "issued") || applications[0];
+      if (!item) {
+        els.letterOutput.innerHTML = `<div class="empty" style="margin:16px">Tiada rekod untuk dijana sebagai surat.</div>`;
+        return;
+      }
+      selectedId = item.id;
+      const letter = activeLetter === "approval" ? approvalLetter(item) : invitationLetter(item);
+      els.letterOutput.innerHTML = letter;
+      renderSummary();
+    }
+
+    function approvalLetter(item) {
+      return `
+        <article class="letter">
+          <div class="letter-header">
+            <div>
+              <strong>PEJABAT PENDIDIKAN DAERAH KLANG</strong><br>
+              <span>Surat Kelulusan Program Ceramah</span>
+            </div>
+            <div><strong>${escapeHtml(item.id)}</strong></div>
+          </div>
+          <p>Pengetua / Guru Besar<br><strong>${escapeHtml(item.schoolName)}</strong></p>
+          <p class="subject">Kelulusan Pelaksanaan Program Ceramah</p>
+          <p>Dengan hormatnya perkara di atas adalah dirujuk.</p>
+          <p>Dimaklumkan bahawa permohonan pihak sekolah untuk melaksanakan program ceramah seperti butiran berikut adalah diluluskan tertakluk kepada pematuhan peraturan semasa Kementerian Pendidikan Malaysia dan Pejabat Pendidikan Daerah Klang.</p>
+          <table class="letter-table">
+            <tr><td>Nama program</td><td>${escapeHtml(item.programTitle)}</td></tr>
+            <tr><td>Tarikh program</td><td>${formatDate(item.programDate)}</td></tr>
+            <tr><td>Nama penceramah</td><td>${escapeHtml(item.speakerName)}</td></tr>
+            <tr><td>Kategori penceramah</td><td>${categories[item.speakerCategory].label}</td></tr>
+            <tr><td>Jabatan / organisasi</td><td>${escapeHtml(item.speakerAgency)}</td></tr>
+          </table>
+          <p>Pihak sekolah hendaklah memastikan pengisian program adalah bersesuaian, tidak bercanggah dengan dasar semasa, dan mematuhi aspek keselamatan murid sepanjang program berlangsung.</p>
+          <p>Sekian, terima kasih.</p>
+          <p style="margin-top:36px"><strong>Pengarah / Pegawai Pendidikan Daerah</strong><br>Pejabat Pendidikan Daerah Klang</p>
+        </article>
+      `;
+    }
+
+    function invitationLetter(item) {
+      return `
+        <article class="letter">
+          <div class="letter-header">
+            <div>
+              <strong>PEJABAT PENDIDIKAN DAERAH KLANG</strong><br>
+              <span>Surat Jemputan Kepada Penceramah</span>
+            </div>
+            <div><strong>${escapeHtml(item.id)}</strong></div>
+          </div>
+          <p>Kepada:<br><strong>${escapeHtml(item.speakerName)}</strong><br>${escapeHtml(item.speakerAgency)}</p>
+          <p class="subject">Jemputan Sebagai Penceramah Program Sekolah</p>
+          <p>Dengan hormatnya perkara di atas adalah dirujuk.</p>
+          <p>Sukacita dimaklumkan bahawa Pejabat Pendidikan Daerah Klang menjemput pihak tuan/puan sebagai penceramah bagi program berikut:</p>
+          <table class="letter-table">
+            <tr><td>Nama program</td><td>${escapeHtml(item.programTitle)}</td></tr>
+            <tr><td>Sekolah</td><td>${escapeHtml(item.schoolName)}</td></tr>
+            <tr><td>Tarikh program</td><td>${formatDate(item.programDate)}</td></tr>
+            <tr><td>Tujuan program</td><td>${escapeHtml(item.purpose || "Seperti permohonan pihak sekolah.")}</td></tr>
+          </table>
+          <p>Kerjasama dan komitmen tuan/puan dalam menjayakan program ini amat dihargai.</p>
+          <p>Sekian, terima kasih.</p>
+          <p style="margin-top:36px"><strong>Pengarah / Pegawai Pendidikan Daerah</strong><br>Pejabat Pendidikan Daerah Klang</p>
+        </article>
+      `;
+    }
+
+    function renderAll() {
+      renderMetrics();
+      renderRows();
+      renderSummary();
+      renderLetters();
+      renderDocumentHint();
+    }
+
+    function toast(message) {
+      els.toast.textContent = message;
+      els.toast.classList.add("show");
+      window.clearTimeout(toast.timer);
+      toast.timer = window.setTimeout(() => els.toast.classList.remove("show"), 2600);
+    }
+
+    els.navButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        setSection(button.dataset.section);
+        history.replaceState(null, "", `#${button.dataset.section}`);
+      });
+    });
+
+    document.getElementById("newApplication").addEventListener("click", () => {
+      fillForm(null);
+      setSection("application");
+      els.schoolName.focus();
+    });
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("service-worker.js").catch(() => {
+          toast("App masih boleh digunakan, tetapi cache offline tidak aktif.");
+        });
+      });
+    }
+
+    window.addEventListener("beforeinstallprompt", (event) => {
+      event.preventDefault();
+      deferredInstallPrompt = event;
+      els.installApp.hidden = false;
+    });
+
+    els.installApp.addEventListener("click", async () => {
+      if (!deferredInstallPrompt) return;
+      deferredInstallPrompt.prompt();
+      await deferredInstallPrompt.userChoice;
+      deferredInstallPrompt = null;
+      els.installApp.hidden = true;
+    });
+
+    document.getElementById("resetDemo").addEventListener("click", () => {
+      applications = seedApplications.map((item) => ({ ...item, docs: { ...item.docs } }));
+      selectedId = applications[0].id;
+      editingId = "";
+      persist();
+      fillForm(null);
+      renderAll();
+      toast("Data demo telah dipulihkan.");
+    });
+
+    document.getElementById("clearForm").addEventListener("click", () => fillForm(null));
+
+    ["change", "input"].forEach((eventName) => {
+      [els.speakerCategory, els.docCover, els.docAppointment, els.docIc, els.docInvite].forEach((input) => {
+        input.addEventListener(eventName, renderDocumentHint);
+      });
+    });
+
+    els.applicationForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = getFormData(true);
+      const existingIndex = applications.findIndex((item) => item.id === data.id);
+      const priorStatus = existingIndex >= 0 ? applications[existingIndex].status : "sent";
+      data.status = isComplete(data) ? priorStatus : "review";
+      if (existingIndex >= 0) {
+        applications[existingIndex] = { ...applications[existingIndex], ...data };
+      } else {
+        applications.unshift(data);
+      }
+      selectedId = data.id;
+      editingId = data.id;
+      persist();
+      renderAll();
+      setSection("dashboard");
+      toast("Permohonan sekolah telah disimpan.");
+    });
+
+    els.applicationRows.addEventListener("click", (event) => {
+      const button = event.target.closest("button");
+      if (!button) return;
+      const id = button.dataset.id;
+      const item = applications.find((entry) => entry.id === id);
+      if (!item) return;
+      if (button.dataset.action === "select") {
+        selectedId = id;
+        renderSummary();
+        toast(`${id} dipilih.`);
+      }
+      if (button.dataset.action === "edit") {
+        selectedId = id;
+        fillForm(item);
+        setSection("application");
+      }
+      if (button.dataset.action === "advance") {
+        advanceApplication(id);
+      }
+    });
+
+    els.summaryPanel.addEventListener("click", (event) => {
+      const button = event.target.closest("button");
+      if (!button) return;
+      const item = applications.find((entry) => entry.id === selectedId);
+      if (!item) return;
+      if (button.dataset.summary === "edit") {
+        fillForm(item);
+        setSection("application");
+      }
+      if (button.dataset.summary === "advance") {
+        if (item.status === "issued") {
+          setSection("letters");
+        } else {
+          advanceApplication(item.id);
+        }
+      }
+    });
+
+    document.querySelectorAll(".letter-tab").forEach((button) => {
+      button.addEventListener("click", () => {
+        activeLetter = button.dataset.letter;
+        document.querySelectorAll(".letter-tab").forEach((tab) => tab.classList.toggle("active", tab === button));
+        renderLetters();
+      });
+    });
+
+    document.getElementById("chooseFirst").addEventListener("click", () => {
+      const ready = applications.find((item) => item.status === "issued") || applications.find(isComplete);
+      if (ready) {
+        selectedId = ready.id;
+        renderAll();
+        toast(`${ready.id} dipilih untuk surat.`);
+      }
+    });
+
+    document.getElementById("printLetters").addEventListener("click", () => {
+      const item = applications.find((entry) => entry.id === selectedId);
+      if (!item) {
+        toast("Tiada rekod dipilih.");
+        return;
+      }
+      if (item.status !== "issued") {
+        item.status = "issued";
+        persist();
+        renderAll();
+      }
+      window.print();
+    });
+
+    fillForm(null);
+    renderAll();
+    if (titles[location.hash.slice(1)]) setSection(location.hash.slice(1));
+  </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Ikon Sistem Kelulusan Penceramah PPD</title>
+  <desc id="desc">Ikon aplikasi berwarna hijau teal dengan dokumen dan tanda semak.</desc>
+  <rect width="512" height="512" rx="96" fill="#0d7b83"/>
+  <path d="M96 126c0-20 16-36 36-36h174l110 110v186c0 20-16 36-36 36H132c-20 0-36-16-36-36V126z" fill="#ffffff"/>
+  <path d="M306 90v82c0 16 12 28 28 28h82L306 90z" fill="#d99a28"/>
+  <path d="M154 222h188" stroke="#8ba2ad" stroke-width="22" stroke-linecap="round"/>
+  <path d="M154 284h146" stroke="#8ba2ad" stroke-width="22" stroke-linecap="round"/>
+  <path d="M154 346h92" stroke="#8ba2ad" stroke-width="22" stroke-linecap="round"/>
+  <circle cx="342" cy="336" r="70" fill="#1d7a45"/>
+  <path d="M307 334l25 25 49-57" fill="none" stroke="#ffffff" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
