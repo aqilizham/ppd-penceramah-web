@@ -827,6 +827,7 @@
         <button data-section="application"><span>B</span><span>Borang Sekolah</span></button>
         <button data-section="workflow"><span>F</span><span>Flow Proses</span></button>
         <button data-section="letters"><span>S</span><span>Surat PPD</span></button>
+        <button data-section="account"><span>A</span><span>Akaun Sistem</span></button>
       </nav>
 
       <div class="sidebar-note">
@@ -920,6 +921,14 @@
                   <input id="speakerIc" required placeholder="Contoh: 800101-10-5555">
                 </div>
                 <div class="field">
+                  <label for="speakerPhone">No. telefon penceramah</label>
+                  <input id="speakerPhone" placeholder="Contoh: 012-3456789">
+                </div>
+                <div class="field">
+                  <label for="speakerCitizenship">Warganegara</label>
+                  <input id="speakerCitizenship" placeholder="Contoh: Malaysia">
+                </div>
+                <div class="field">
                   <label for="speakerCategory">Kategori penceramah</label>
                   <select id="speakerCategory" required>
                     <option value="dalam">Penjawat awam dalam PPD Klang</option>
@@ -932,8 +941,60 @@
                   <input id="speakerAgency" required placeholder="Contoh: Klinik Kesihatan Klang">
                 </div>
                 <div class="field full">
+                  <label for="speakerAddress">Alamat tempat tinggal penceramah</label>
+                  <textarea id="speakerAddress" placeholder="Alamat penuh penceramah"></textarea>
+                </div>
+                <div class="field">
+                  <label for="academicQualification">Kelulusan akademik</label>
+                  <input id="academicQualification" placeholder="Contoh: SPM / Diploma / Ijazah">
+                </div>
+                <div class="field">
+                  <label for="professionalQualification">Kelulusan profesional</label>
+                  <input id="professionalQualification" placeholder="Bidang berkaitan ceramah">
+                </div>
+                <div class="field">
+                  <label for="certification">Pentauliahan / sijil</label>
+                  <input id="certification" placeholder="Contoh: HRDCorp / Jurulatih / Persatuan">
+                </div>
+                <div class="field">
+                  <label for="feeAmount">Bayaran dikenakan jika berkenaan</label>
+                  <input id="feeAmount" type="number" min="0" step="0.01" placeholder="0.00">
+                </div>
+                <div class="field">
+                  <label for="organizationName">Nama pertubuhan / syarikat</label>
+                  <input id="organizationName" placeholder="Jika berkaitan">
+                </div>
+                <div class="field">
+                  <label for="organizationRegistrationNo">No. sijil pendaftaran</label>
+                  <input id="organizationRegistrationNo" placeholder="Jika berkaitan">
+                </div>
+                <div class="field full">
+                  <label for="organizationAddress">Alamat rasmi pertubuhan / syarikat</label>
+                  <textarea id="organizationAddress" placeholder="Jika berkaitan"></textarea>
+                </div>
+                <div class="field full">
                   <label for="purpose">Tujuan / ringkasan program</label>
                   <textarea id="purpose" placeholder="Ringkasan objektif ceramah"></textarea>
+                </div>
+                <div class="field">
+                  <label for="programTime">Masa program</label>
+                  <input id="programTime" placeholder="Contoh: 9.00 pagi - 1.00 tengah hari">
+                </div>
+                <div class="field">
+                  <label for="programVenue">Tempat program</label>
+                  <input id="programVenue" placeholder="Contoh: Bilik Seminar">
+                </div>
+                <div class="field">
+                  <label for="targetParticipants">Sasaran peserta</label>
+                  <input id="targetParticipants" placeholder="Contoh: 50 pelajar">
+                </div>
+                <div class="field">
+                  <label for="contactName">Pegawai untuk dihubungi</label>
+                  <input id="contactName" placeholder="Nama guru penyelaras">
+                </div>
+                <div class="field">
+                  <label for="contactPhone">Telefon pegawai dihubungi</label>
+                  <input id="contactPhone" placeholder="Contoh: 019-1234567">
                 </div>
                 <div class="field full">
                   <label>Dokumen disertakan</label>
@@ -953,6 +1014,27 @@
                     <label class="check">
                       <input type="checkbox" id="docInvite">
                       <span>Surat jemputan sekolah <small>Wajib jika penceramah swasta</small></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="field full">
+                  <label>Muat naik dokumen sokongan</label>
+                  <div class="checks">
+                    <label class="check">
+                      <input type="file" id="fileCover" accept=".pdf,.png,.jpg,.jpeg">
+                      <span>Surat iringan <small>PDF / imej</small></span>
+                    </label>
+                    <label class="check">
+                      <input type="file" id="fileAppointment" accept=".pdf,.png,.jpg,.jpeg">
+                      <span>Borang penceramah <small>PDF / imej</small></span>
+                    </label>
+                    <label class="check">
+                      <input type="file" id="fileIc" accept=".pdf,.png,.jpg,.jpeg">
+                      <span>IC penceramah <small>PDF / imej</small></span>
+                    </label>
+                    <label class="check">
+                      <input type="file" id="fileInvite" accept=".pdf,.png,.jpg,.jpeg">
+                      <span>Surat jemputan sekolah <small>Wajib untuk swasta</small></span>
                     </label>
                   </div>
                 </div>
@@ -1088,11 +1170,98 @@
           <div id="letterOutput"></div>
         </div>
       </section>
+
+      <section class="section" id="account">
+        <div class="dashboard-grid">
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Akaun dan Pangkalan Data</h3>
+              <span class="tag" id="backendStatus">Mode Demo</span>
+            </div>
+            <div class="panel-body">
+              <div id="backendNotice" class="notice">
+                Backend belum disambungkan. App masih berjalan sebagai demo menggunakan simpanan pelayar.
+              </div>
+              <div style="height:14px"></div>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="authEmail">E-mel</label>
+                  <input id="authEmail" type="email" autocomplete="email" placeholder="nama@sekolah.edu.my">
+                </div>
+                <div class="field">
+                  <label for="authPassword">Kata laluan</label>
+                  <input id="authPassword" type="password" autocomplete="current-password" placeholder="Minimum 6 aksara">
+                </div>
+                <div class="field">
+                  <label for="authName">Nama pengguna</label>
+                  <input id="authName" placeholder="Nama guru / pegawai">
+                </div>
+                <div class="field">
+                  <label for="authSchool">Sekolah / unit</label>
+                  <input id="authSchool" placeholder="Contoh: SMK Tengku Ampuan Rahimah">
+                </div>
+                <div class="field">
+                  <label for="authRole">Peranan</label>
+                  <select id="authRole">
+                    <option value="school">Sekolah</option>
+                    <option value="ppd">PPD</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>Status sesi</label>
+                  <input id="currentUser" readonly value="Belum log masuk">
+                </div>
+              </div>
+              <div style="height:14px"></div>
+              <div class="top-actions">
+                <button class="btn secondary" id="signInBtn" type="button">Log Masuk</button>
+                <button class="btn" id="signUpBtn" type="button">Daftar Sekolah</button>
+                <button class="btn warning" id="signOutBtn" type="button">Log Keluar</button>
+                <button class="btn secondary" id="syncBackendBtn" type="button">Segar Semula Data</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Peranan Sistem</h3>
+              <span class="tag">RLS</span>
+            </div>
+            <div class="panel-body">
+              <div class="flow">
+                <div class="flow-node">
+                  <div class="flow-no">S</div>
+                  <div>
+                    <h4>Sekolah</h4>
+                    <p>Daftar permohonan, muat naik dokumen, kemas kini draf, dan hantar kepada PPD.</p>
+                  </div>
+                </div>
+                <div class="flow-node">
+                  <div class="flow-no">P</div>
+                  <div>
+                    <h4>PPD</h4>
+                    <p>Semak semua permohonan, proses kelulusan, dan jana surat rasmi PPD.</p>
+                  </div>
+                </div>
+                <div class="flow-node">
+                  <div class="flow-no">D</div>
+                  <div>
+                    <h4>Dokumen</h4>
+                    <p>Fail disimpan dalam Supabase Storage dengan rekod audit untuk setiap permohonan.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   </div>
 
   <div class="toast" id="toast"></div>
 
+  <script src="config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     const STORAGE_KEY = "ppd-speaker-approval-demo";
 
@@ -1164,6 +1333,10 @@
     let editingId = "";
     let activeLetter = "approval";
     let deferredInstallPrompt = null;
+    let db = null;
+    let backendReady = false;
+    let currentSession = null;
+    let currentProfile = null;
 
     const els = {
       navButtons: document.querySelectorAll(".nav button"),
@@ -1181,26 +1354,58 @@
       letterOutput: document.getElementById("letterOutput"),
       toast: document.getElementById("toast"),
       installApp: document.getElementById("installApp"),
+      backendStatus: document.getElementById("backendStatus"),
+      backendNotice: document.getElementById("backendNotice"),
+      authEmail: document.getElementById("authEmail"),
+      authPassword: document.getElementById("authPassword"),
+      authName: document.getElementById("authName"),
+      authSchool: document.getElementById("authSchool"),
+      authRole: document.getElementById("authRole"),
+      currentUser: document.getElementById("currentUser"),
+      signInBtn: document.getElementById("signInBtn"),
+      signUpBtn: document.getElementById("signUpBtn"),
+      signOutBtn: document.getElementById("signOutBtn"),
+      syncBackendBtn: document.getElementById("syncBackendBtn"),
       schoolName: document.getElementById("schoolName"),
       officerName: document.getElementById("officerName"),
       programTitle: document.getElementById("programTitle"),
       programDate: document.getElementById("programDate"),
       speakerName: document.getElementById("speakerName"),
       speakerIc: document.getElementById("speakerIc"),
+      speakerPhone: document.getElementById("speakerPhone"),
+      speakerCitizenship: document.getElementById("speakerCitizenship"),
       speakerCategory: document.getElementById("speakerCategory"),
       speakerAgency: document.getElementById("speakerAgency"),
+      speakerAddress: document.getElementById("speakerAddress"),
+      academicQualification: document.getElementById("academicQualification"),
+      professionalQualification: document.getElementById("professionalQualification"),
+      certification: document.getElementById("certification"),
+      feeAmount: document.getElementById("feeAmount"),
+      organizationName: document.getElementById("organizationName"),
+      organizationRegistrationNo: document.getElementById("organizationRegistrationNo"),
+      organizationAddress: document.getElementById("organizationAddress"),
       purpose: document.getElementById("purpose"),
+      programTime: document.getElementById("programTime"),
+      programVenue: document.getElementById("programVenue"),
+      targetParticipants: document.getElementById("targetParticipants"),
+      contactName: document.getElementById("contactName"),
+      contactPhone: document.getElementById("contactPhone"),
       docCover: document.getElementById("docCover"),
       docAppointment: document.getElementById("docAppointment"),
       docIc: document.getElementById("docIc"),
-      docInvite: document.getElementById("docInvite")
+      docInvite: document.getElementById("docInvite"),
+      fileCover: document.getElementById("fileCover"),
+      fileAppointment: document.getElementById("fileAppointment"),
+      fileIc: document.getElementById("fileIc"),
+      fileInvite: document.getElementById("fileInvite")
     };
 
     const titles = {
       dashboard: ["Dashboard Permohonan", "Pantau permohonan sekolah, semak dokumen wajib, proses kelulusan PPD, dan jana dua surat rasmi."],
       application: ["Borang Permohonan Sekolah", "Rekod permohonan baharu atau kemas kini maklumat penceramah sebelum dihantar untuk proses PPD."],
       workflow: ["Flow Chart Kelulusan Penceramah", "Aliran kerja penuh daripada penyediaan sekolah sehingga PPD mengeluarkan surat rasmi."],
-      letters: ["Surat Rasmi PPD", "Pratonton surat kelulusan program ceramah dan surat jemputan kepada penceramah berdasarkan rekod terpilih."]
+      letters: ["Surat Rasmi PPD", "Pratonton surat kelulusan program ceramah dan surat jemputan kepada penceramah berdasarkan rekod terpilih."],
+      account: ["Akaun Sistem", "Sambungkan sistem kepada Supabase untuk login pengguna, peranan sekolah/PPD, database dan muat naik dokumen."]
     };
 
     function loadApplications() {
@@ -1214,7 +1419,237 @@
     }
 
     function persist() {
+      if (backendReady) return;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(applications));
+    }
+
+    function hasBackendConfig() {
+      const config = window.APP_CONFIG || {};
+      return Boolean(config.supabaseUrl && config.supabaseAnonKey && window.supabase);
+    }
+
+    function roleLabel(role) {
+      return role === "ppd" ? "PPD" : "Sekolah";
+    }
+
+    function canProcessApplications() {
+      return !backendReady || currentProfile?.role === "ppd";
+    }
+
+    function updateBackendStatus(message) {
+      if (!els.backendStatus || !els.backendNotice) return;
+      if (!hasBackendConfig()) {
+        els.backendStatus.textContent = "Mode Demo";
+        els.backendNotice.className = "notice";
+        els.backendNotice.textContent = "Backend belum disambungkan. App masih berjalan sebagai demo menggunakan simpanan pelayar.";
+        els.currentUser.value = "Belum log masuk";
+        return;
+      }
+
+      if (!currentSession) {
+        els.backendStatus.textContent = "Supabase Aktif";
+        els.backendNotice.className = "notice";
+        els.backendNotice.textContent = message || "Supabase telah dikonfigurasi. Log masuk untuk menggunakan database dan muat naik dokumen.";
+        els.currentUser.value = "Belum log masuk";
+        return;
+      }
+
+      els.backendStatus.textContent = `Log Masuk: ${roleLabel(currentProfile?.role)}`;
+      els.backendNotice.className = "notice ok";
+      els.backendNotice.textContent = message || "Data kini dibaca dan disimpan melalui Supabase.";
+      els.currentUser.value = `${currentSession.user.email} (${roleLabel(currentProfile?.role)})`;
+    }
+
+    function mapDbApplication(row) {
+      return {
+        id: row.ref_no,
+        schoolName: row.school_name || "",
+        officerName: row.officer_name || "",
+        programTitle: row.program_title || "",
+        programDate: row.program_date || "",
+        speakerName: row.speaker_name || "",
+        speakerIc: row.speaker_ic || "",
+        speakerPhone: row.speaker_phone || "",
+        speakerCitizenship: row.speaker_citizenship || "",
+        speakerAddress: row.speaker_address || "",
+        speakerCategory: row.speaker_category || "dalam",
+        speakerAgency: row.speaker_agency || "",
+        academicQualification: row.academic_qualification || "",
+        professionalQualification: row.professional_qualification || "",
+        certification: row.certification || "",
+        organizationName: row.organization_name || "",
+        organizationAddress: row.organization_address || "",
+        organizationRegistrationNo: row.organization_registration_no || "",
+        feeAmount: row.fee_amount || "",
+        purpose: row.purpose || "",
+        programTime: row.program_time || "",
+        programVenue: row.program_venue || "",
+        targetParticipants: row.target_participants || "",
+        contactName: row.contact_name || "",
+        contactPhone: row.contact_phone || "",
+        docs: row.docs || { cover: false, appointment: false, ic: false, invite: false },
+        status: row.status || "sent",
+        ppdOfficer: row.ppd_officer || "Unit berkaitan",
+        backendId: row.id
+      };
+    }
+
+    function toDbPayload(data) {
+      return {
+        ref_no: data.id,
+        school_name: data.schoolName,
+        officer_name: data.officerName,
+        program_title: data.programTitle,
+        program_date: data.programDate || null,
+        speaker_name: data.speakerName,
+        speaker_ic: data.speakerIc,
+        speaker_phone: data.speakerPhone,
+        speaker_citizenship: data.speakerCitizenship,
+        speaker_address: data.speakerAddress,
+        speaker_category: data.speakerCategory,
+        speaker_agency: data.speakerAgency,
+        academic_qualification: data.academicQualification,
+        professional_qualification: data.professionalQualification,
+        certification: data.certification,
+        organization_name: data.organizationName,
+        organization_address: data.organizationAddress,
+        organization_registration_no: data.organizationRegistrationNo,
+        fee_amount: data.feeAmount || null,
+        purpose: data.purpose,
+        program_time: data.programTime,
+        program_venue: data.programVenue,
+        target_participants: data.targetParticipants,
+        contact_name: data.contactName,
+        contact_phone: data.contactPhone,
+        docs: data.docs,
+        status: data.status,
+        ppd_officer: data.ppdOfficer || "Unit berkaitan",
+        created_by: currentSession?.user?.id
+      };
+    }
+
+    async function ensureProfile() {
+      if (!db || !currentSession) return null;
+      const { data, error } = await db
+        .from("profiles")
+        .select("*")
+        .eq("id", currentSession.user.id)
+        .maybeSingle();
+      if (error) throw error;
+      currentProfile = data || {
+        id: currentSession.user.id,
+        email: currentSession.user.email,
+        full_name: currentSession.user.user_metadata?.full_name || "",
+        school_name: currentSession.user.user_metadata?.school_name || "",
+        role: currentSession.user.user_metadata?.role || "school"
+      };
+      return currentProfile;
+    }
+
+    async function loadApplicationsFromBackend() {
+      if (!db || !currentSession) return;
+      const { data, error } = await db
+        .from("applications")
+        .select("*")
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      applications = (data || []).map(mapDbApplication);
+      selectedId = applications[0]?.id || "";
+      renderAll();
+    }
+
+    async function initBackend() {
+      updateBackendStatus();
+      if (!hasBackendConfig()) return;
+      db = window.supabase.createClient(window.APP_CONFIG.supabaseUrl, window.APP_CONFIG.supabaseAnonKey);
+      backendReady = true;
+      const { data } = await db.auth.getSession();
+      currentSession = data.session;
+      if (currentSession) {
+        await ensureProfile();
+        await loadApplicationsFromBackend();
+      }
+      updateBackendStatus();
+      db.auth.onAuthStateChange(async (_event, session) => {
+        currentSession = session;
+        currentProfile = null;
+        if (session) {
+          await ensureProfile();
+          await loadApplicationsFromBackend();
+        }
+        updateBackendStatus();
+        renderAll();
+      });
+    }
+
+    async function uploadSelectedDocuments(refNo) {
+      if (!db || !currentSession) return;
+      const fileInputs = [
+        ["cover", els.fileCover],
+        ["appointment", els.fileAppointment],
+        ["ic", els.fileIc],
+        ["invite", els.fileInvite]
+      ];
+      for (const [docType, input] of fileInputs) {
+        const file = input?.files?.[0];
+        if (!file) continue;
+        const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+        const path = `${currentSession.user.id}/${refNo}/${docType}-${Date.now()}-${safeName}`;
+        const uploaded = await db.storage.from("speaker-documents").upload(path, file, { upsert: true });
+        if (uploaded.error) throw uploaded.error;
+        await db.from("documents").insert({
+          application_ref: refNo,
+          document_type: docType,
+          file_name: file.name,
+          storage_path: path,
+          uploaded_by: currentSession.user.id
+        });
+      }
+    }
+
+    async function saveApplicationRecord(data) {
+      if (!backendReady || !currentSession) {
+        const existingIndex = applications.findIndex((item) => item.id === data.id);
+        const priorStatus = existingIndex >= 0 ? applications[existingIndex].status : "sent";
+        data.status = isComplete(data) ? priorStatus : "review";
+        if (existingIndex >= 0) {
+          applications[existingIndex] = { ...applications[existingIndex], ...data };
+        } else {
+          applications.unshift(data);
+        }
+        persist();
+        return;
+      }
+
+      const existingIndex = applications.findIndex((item) => item.id === data.id);
+      const priorStatus = existingIndex >= 0 ? applications[existingIndex].status : "sent";
+      data.status = isComplete(data) ? priorStatus : "review";
+      const payload = toDbPayload(data);
+      let error;
+      if (existingIndex >= 0) {
+        delete payload.created_by;
+        ({ error } = await db.from("applications").update(payload).eq("ref_no", data.id));
+      } else {
+        ({ error } = await db.from("applications").insert(payload));
+      }
+      if (error) throw error;
+      await uploadSelectedDocuments(data.id);
+      await loadApplicationsFromBackend();
+    }
+
+    async function updateApplicationStatus(item) {
+      if (!backendReady || !currentSession) return;
+      const { error } = await db
+        .from("applications")
+        .update({ status: item.status, docs: item.docs, updated_at: new Date().toISOString() })
+        .eq("ref_no", item.id);
+      if (error) throw error;
+      await db.from("status_history").insert({
+        application_ref: item.id,
+        status: item.status,
+        note: `Status dikemas kini kepada ${getStatus(item.status).label}`,
+        changed_by: currentSession.user.id
+      });
     }
 
     function getStatus(statusKey) {
@@ -1306,6 +1741,7 @@
       els.applicationRows.innerHTML = applications.map((item) => {
         const status = getStatus(item.status);
         const category = categories[item.speakerCategory];
+        const processDisabled = canProcessApplications() ? "" : "disabled";
         return `
           <tr>
             <td><strong>${escapeHtml(item.id)}</strong></td>
@@ -1318,7 +1754,7 @@
               <div class="row-actions">
                 <button class="mini-btn" data-action="select" data-id="${escapeHtml(item.id)}">Pilih</button>
                 <button class="mini-btn" data-action="edit" data-id="${escapeHtml(item.id)}">Edit</button>
-                <button class="mini-btn" data-action="advance" data-id="${escapeHtml(item.id)}">Proses</button>
+                <button class="mini-btn" data-action="advance" data-id="${escapeHtml(item.id)}" ${processDisabled}>Proses</button>
               </div>
             </td>
           </tr>
@@ -1336,6 +1772,7 @@
 
       const missing = missingDocs(item);
       const status = getStatus(item.status);
+      const processDisabled = item.status === "issued" || canProcessApplications() ? "" : "disabled";
       els.selectedRef.textContent = item.id;
       els.summaryPanel.innerHTML = `
         <div class="${missing.length ? "notice danger" : "notice ok"}">
@@ -1352,7 +1789,7 @@
         </table>
         <div class="top-actions">
           <button class="btn secondary" data-summary="edit">Edit Rekod</button>
-          <button class="btn" data-summary="advance">${item.status === "issued" ? "Lihat Surat" : "Proses Seterusnya"}</button>
+          <button class="btn" data-summary="advance" ${processDisabled}>${item.status === "issued" ? "Lihat Surat" : "Proses Seterusnya"}</button>
         </div>
       `;
     }
@@ -1379,17 +1816,32 @@
         programDate: els.programDate.value,
         speakerName: els.speakerName.value.trim(),
         speakerIc: els.speakerIc.value.trim(),
+        speakerPhone: els.speakerPhone.value.trim(),
+        speakerCitizenship: els.speakerCitizenship.value.trim(),
+        speakerAddress: els.speakerAddress.value.trim(),
         speakerCategory: els.speakerCategory.value,
         speakerAgency: els.speakerAgency.value.trim(),
+        academicQualification: els.academicQualification.value.trim(),
+        professionalQualification: els.professionalQualification.value.trim(),
+        certification: els.certification.value.trim(),
+        organizationName: els.organizationName.value.trim(),
+        organizationAddress: els.organizationAddress.value.trim(),
+        organizationRegistrationNo: els.organizationRegistrationNo.value.trim(),
+        feeAmount: els.feeAmount.value,
         purpose: els.purpose.value.trim(),
+        programTime: els.programTime.value.trim(),
+        programVenue: els.programVenue.value.trim(),
+        targetParticipants: els.targetParticipants.value.trim(),
+        contactName: els.contactName.value.trim(),
+        contactPhone: els.contactPhone.value.trim(),
         docs: {
-          cover: els.docCover.checked,
-          appointment: els.docAppointment.checked,
-          ic: els.docIc.checked,
-          invite: els.docInvite.checked
+          cover: els.docCover.checked || Boolean(els.fileCover?.files?.length),
+          appointment: els.docAppointment.checked || Boolean(els.fileAppointment?.files?.length),
+          ic: els.docIc.checked || Boolean(els.fileIc?.files?.length),
+          invite: els.docInvite.checked || Boolean(els.fileInvite?.files?.length)
         },
         status: "sent",
-        ppdOfficer: "Unit berkaitan"
+        ppdOfficer: currentProfile?.role === "ppd" ? currentProfile.full_name || "Pegawai PPD" : "Unit berkaitan"
       };
     }
 
@@ -1402,24 +1854,48 @@
       els.programDate.value = item?.programDate || "";
       els.speakerName.value = item?.speakerName || "";
       els.speakerIc.value = item?.speakerIc || "";
+      els.speakerPhone.value = item?.speakerPhone || "";
+      els.speakerCitizenship.value = item?.speakerCitizenship || "";
+      els.speakerAddress.value = item?.speakerAddress || "";
       els.speakerCategory.value = item?.speakerCategory || "dalam";
       els.speakerAgency.value = item?.speakerAgency || "";
+      els.academicQualification.value = item?.academicQualification || "";
+      els.professionalQualification.value = item?.professionalQualification || "";
+      els.certification.value = item?.certification || "";
+      els.organizationName.value = item?.organizationName || "";
+      els.organizationAddress.value = item?.organizationAddress || "";
+      els.organizationRegistrationNo.value = item?.organizationRegistrationNo || "";
+      els.feeAmount.value = item?.feeAmount || "";
       els.purpose.value = item?.purpose || "";
+      els.programTime.value = item?.programTime || "";
+      els.programVenue.value = item?.programVenue || "";
+      els.targetParticipants.value = item?.targetParticipants || "";
+      els.contactName.value = item?.contactName || "";
+      els.contactPhone.value = item?.contactPhone || "";
       els.docCover.checked = item?.docs.cover || false;
       els.docAppointment.checked = item?.docs.appointment || false;
       els.docIc.checked = item?.docs.ic || false;
       els.docInvite.checked = item?.docs.invite || false;
+      [els.fileCover, els.fileAppointment, els.fileIc, els.fileInvite].forEach((input) => {
+        if (input) input.value = "";
+      });
       renderDocumentHint();
     }
 
-    function advanceApplication(id) {
+    async function advanceApplication(id) {
       const index = applications.findIndex((item) => item.id === id);
       if (index < 0) return;
       const item = applications[index];
       selectedId = id;
 
+      if (backendReady && currentProfile?.role !== "ppd") {
+        toast("Hanya pengguna PPD boleh memproses kelulusan.");
+        return;
+      }
+
       if (!isComplete(item)) {
         item.status = "review";
+        if (backendReady && currentSession) await updateApplicationStatus(item);
         persist();
         renderAll();
         toast("Permohonan belum lengkap. Sistem kekalkan status Semakan Dokumen.");
@@ -1429,6 +1905,7 @@
       const currentIndex = statuses.findIndex((status) => status.key === item.status);
       const next = statuses[Math.min(currentIndex + 1, statuses.length - 1)];
       item.status = next.key;
+      if (backendReady && currentSession) await updateApplicationStatus(item);
       persist();
       renderAll();
       toast(item.status === "issued" ? "Dua surat PPD telah dijana untuk rekod ini." : `Status dikemas kini kepada ${next.label}.`);
@@ -1463,6 +1940,9 @@
           <table class="letter-table">
             <tr><td>Nama program</td><td>${escapeHtml(item.programTitle)}</td></tr>
             <tr><td>Tarikh program</td><td>${formatDate(item.programDate)}</td></tr>
+            <tr><td>Masa</td><td>${escapeHtml(item.programTime || "-")}</td></tr>
+            <tr><td>Tempat</td><td>${escapeHtml(item.programVenue || "-")}</td></tr>
+            <tr><td>Sasaran peserta</td><td>${escapeHtml(item.targetParticipants || "-")}</td></tr>
             <tr><td>Nama penceramah</td><td>${escapeHtml(item.speakerName)}</td></tr>
             <tr><td>Kategori penceramah</td><td>${categories[item.speakerCategory].label}</td></tr>
             <tr><td>Jabatan / organisasi</td><td>${escapeHtml(item.speakerAgency)}</td></tr>
@@ -1492,7 +1972,11 @@
             <tr><td>Nama program</td><td>${escapeHtml(item.programTitle)}</td></tr>
             <tr><td>Sekolah</td><td>${escapeHtml(item.schoolName)}</td></tr>
             <tr><td>Tarikh program</td><td>${formatDate(item.programDate)}</td></tr>
+            <tr><td>Masa</td><td>${escapeHtml(item.programTime || "-")}</td></tr>
+            <tr><td>Tempat</td><td>${escapeHtml(item.programVenue || "-")}</td></tr>
+            <tr><td>Sasaran peserta</td><td>${escapeHtml(item.targetParticipants || "-")}</td></tr>
             <tr><td>Tujuan program</td><td>${escapeHtml(item.purpose || "Seperti permohonan pihak sekolah.")}</td></tr>
+            <tr><td>Pegawai dihubungi</td><td>${escapeHtml(item.contactName || "-")} ${escapeHtml(item.contactPhone || "")}</td></tr>
           </table>
           <p>Kerjasama dan komitmen tuan/puan dalam menjayakan program ini amat dihargai.</p>
           <p>Sekian, terima kasih.</p>
@@ -1551,7 +2035,94 @@
       els.installApp.hidden = true;
     });
 
+    els.signInBtn.addEventListener("click", async () => {
+      if (!hasBackendConfig()) {
+        toast("Masukkan Supabase URL dan anon key dalam config.js dahulu.");
+        return;
+      }
+      const email = els.authEmail.value.trim();
+      const password = els.authPassword.value;
+      if (!email || !password) {
+        toast("Masukkan e-mel dan kata laluan.");
+        return;
+      }
+      try {
+        const { data, error } = await db.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        currentSession = data.session;
+        await ensureProfile();
+        await loadApplicationsFromBackend();
+        updateBackendStatus("Log masuk berjaya.");
+        toast("Log masuk berjaya.");
+      } catch (error) {
+        toast(`Log masuk gagal: ${error.message}`);
+      }
+    });
+
+    els.signUpBtn.addEventListener("click", async () => {
+      if (!hasBackendConfig()) {
+        toast("Masukkan Supabase URL dan anon key dalam config.js dahulu.");
+        return;
+      }
+      const email = els.authEmail.value.trim();
+      const password = els.authPassword.value;
+      if (!email || !password) {
+        toast("Masukkan e-mel dan kata laluan.");
+        return;
+      }
+      if (els.authRole.value === "ppd") {
+        toast("Akaun PPD perlu ditetapkan oleh admin dalam Supabase untuk keselamatan.");
+        return;
+      }
+      try {
+        const { error } = await db.auth.signUp({
+          email,
+          password,
+          options: {
+            data: {
+              full_name: els.authName.value.trim(),
+              school_name: els.authSchool.value.trim(),
+              role: "school"
+            }
+          }
+        });
+        if (error) throw error;
+        toast("Akaun sekolah didaftarkan. Semak e-mel jika Supabase meminta pengesahan.");
+      } catch (error) {
+        toast(`Daftar akaun gagal: ${error.message}`);
+      }
+    });
+
+    els.signOutBtn.addEventListener("click", async () => {
+      if (!db) return;
+      await db.auth.signOut();
+      currentSession = null;
+      currentProfile = null;
+      applications = loadApplications();
+      selectedId = applications[0]?.id || "";
+      updateBackendStatus("Sesi telah ditamatkan.");
+      renderAll();
+      toast("Log keluar berjaya.");
+    });
+
+    els.syncBackendBtn.addEventListener("click", async () => {
+      if (!backendReady || !currentSession) {
+        toast("Log masuk ke backend dahulu.");
+        return;
+      }
+      try {
+        await loadApplicationsFromBackend();
+        toast("Data backend dikemas kini.");
+      } catch (error) {
+        toast(`Gagal segar data: ${error.message}`);
+      }
+    });
+
     document.getElementById("resetDemo").addEventListener("click", () => {
+      if (backendReady) {
+        toast("Reset demo hanya untuk mode tanpa backend. Gunakan database Supabase untuk data sebenar.");
+        return;
+      }
       applications = seedApplications.map((item) => ({ ...item, docs: { ...item.docs } }));
       selectedId = applications[0].id;
       editingId = "";
@@ -1564,33 +2135,35 @@
     document.getElementById("clearForm").addEventListener("click", () => fillForm(null));
 
     ["change", "input"].forEach((eventName) => {
-      [els.speakerCategory, els.docCover, els.docAppointment, els.docIc, els.docInvite].forEach((input) => {
+      [els.speakerCategory, els.docCover, els.docAppointment, els.docIc, els.docInvite, els.fileCover, els.fileAppointment, els.fileIc, els.fileInvite].forEach((input) => {
         input.addEventListener(eventName, renderDocumentHint);
       });
     });
 
-    els.applicationForm.addEventListener("submit", (event) => {
+    els.applicationForm.addEventListener("submit", async (event) => {
       event.preventDefault();
       const data = getFormData(true);
-      const existingIndex = applications.findIndex((item) => item.id === data.id);
-      const priorStatus = existingIndex >= 0 ? applications[existingIndex].status : "sent";
-      data.status = isComplete(data) ? priorStatus : "review";
-      if (existingIndex >= 0) {
-        applications[existingIndex] = { ...applications[existingIndex], ...data };
-      } else {
-        applications.unshift(data);
+      if (backendReady && !currentSession) {
+        setSection("account");
+        toast("Log masuk dahulu untuk simpan ke database.");
+        return;
+      }
+      try {
+        await saveApplicationRecord(data);
+      } catch (error) {
+        toast(`Gagal simpan permohonan: ${error.message}`);
+        return;
       }
       selectedId = data.id;
       editingId = data.id;
-      persist();
       renderAll();
       setSection("dashboard");
-      toast("Permohonan sekolah telah disimpan.");
+      toast(backendReady ? "Permohonan telah disimpan ke database." : "Permohonan sekolah telah disimpan.");
     });
 
-    els.applicationRows.addEventListener("click", (event) => {
+    els.applicationRows.addEventListener("click", async (event) => {
       const button = event.target.closest("button");
-      if (!button) return;
+      if (!button || button.disabled) return;
       const id = button.dataset.id;
       const item = applications.find((entry) => entry.id === id);
       if (!item) return;
@@ -1605,11 +2178,15 @@
         setSection("application");
       }
       if (button.dataset.action === "advance") {
-        advanceApplication(id);
+        try {
+          await advanceApplication(id);
+        } catch (error) {
+          toast(`Gagal proses status: ${error.message}`);
+        }
       }
     });
 
-    els.summaryPanel.addEventListener("click", (event) => {
+    els.summaryPanel.addEventListener("click", async (event) => {
       const button = event.target.closest("button");
       if (!button) return;
       const item = applications.find((entry) => entry.id === selectedId);
@@ -1622,7 +2199,11 @@
         if (item.status === "issued") {
           setSection("letters");
         } else {
-          advanceApplication(item.id);
+          try {
+            await advanceApplication(item.id);
+          } catch (error) {
+            toast(`Gagal proses status: ${error.message}`);
+          }
         }
       }
     });
@@ -1661,6 +2242,10 @@
     fillForm(null);
     renderAll();
     if (titles[location.hash.slice(1)]) setSection(location.hash.slice(1));
+    initBackend().catch((error) => {
+      updateBackendStatus("Backend tidak dapat dimulakan. Semak konfigurasi Supabase.");
+      toast(`Backend tidak aktif: ${error.message}`);
+    });
   </script>
 </body>
 </html>

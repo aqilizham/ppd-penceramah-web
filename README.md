@@ -27,6 +27,10 @@ Prototaip ini menterjemahkan flow kelulusan penceramah PPD kepada sistem web app
 - Semakan dokumen wajib mengikut kategori
 - Flow chart proses
 - Pratonton dan cetakan surat PPD
+- Login pengguna melalui Supabase Auth
+- Kawalan peranan sekolah dan PPD
+- Pangkalan data permohonan Supabase
+- Muat naik dokumen ke Supabase Storage
 
 ## Cadangan Status Sistem
 
@@ -41,4 +45,11 @@ Prototaip ini menterjemahkan flow kelulusan penceramah PPD kepada sistem web app
 
 Prototaip ini kini disediakan sebagai Progressive Web App (PWA) dengan manifest aplikasi, ikon app, dan service worker cache. Apabila dihoskan melalui HTTPS, ia boleh dipasang pada telefon melalui Add to Home Screen / Install App.
 
-Prototaip ini menggunakan `localStorage` untuk simpanan demo dalam pelayar. Untuk sistem sebenar, sambungkan modul ini kepada pangkalan data, login pengguna, kawalan peranan sekolah/PPD, muat naik dokumen, nombor rujukan rasmi, dan template surat rasmi PPD yang muktamad.
+Jika `config.js` belum diisi, app menggunakan `localStorage` sebagai mode demo. Untuk sistem sebenar, cipta project Supabase, jalankan `supabase/schema.sql`, kemudian masukkan Project URL dan anon public key dalam `config.js`.
+
+Rujukan tambahan:
+
+- `supabase/schema.sql` untuk database, role dan storage policy
+- `supabase/README.md` untuk langkah setup Supabase
+- `docs/templates.md` untuk medan borang dan template surat berdasarkan PDF contoh
+- `docs/custom-domain.md` untuk sambungan domain seperti `ppdpenceramah.com`

@@ -1,7 +1,8 @@
-const CACHE_NAME = "ppd-penceramah-v2";
+const CACHE_NAME = "ppd-penceramah-v3";
 const APP_SHELL = [
   "./",
   "./index.html",
+  "./config.js",
   "./manifest.webmanifest",
   "./app-icon.svg",
   "./app-icon-192.png",

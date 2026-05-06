@@ -1,4 +1,6 @@
 *.log
 *.zip
+pdf-previews/
+chrome-profile-check*/
 .DS_Store
 Thumbs.db
